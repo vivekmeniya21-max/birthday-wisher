@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Untitled</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html>
+<head>
+  <title>Hey there! 💖</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      text-align: center;
+      font-family: 'Comic Sans MS', sans-serif;
+      overflow: hidden;
+      padding: 50px;
+      transition: transform 0.1s;
+    }
+    h1 {
+      font-size: 60px;
+      color: #ff69b4;
+      animation: rainbow 3s infinite;
+    }
+    @keyframes rainbow {
+      0% {color: red;}
+      25% {color: orange;}
+      50% {color: green;}
+      75% {color: blue;}
+      100% {color: purple;}
+    }
+    p {
+      font-size: 24px;
+      color: #333;
+    }
+    button {
+      background-color: #ff69b4;
+      border: none;
+      color: white;
+      padding: 15px 30px;
+      margin: 10px;
+      font-size: 18px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #ff1493;
+      transform: scale(1.1);
+    }
+    .heart {
+      position: absolute;
+      font-size: 24px;
+      animation: float 5s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes float {
+      0% {transform: translateY(0) rotate(0deg);}
+      100% {transform: translateY(-800px) rotate(360deg);}
+    }
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      pointer-events: none;
+      animation: confettiFall 3s linear infinite;
+    }
+    @keyframes confettiFall {
+      0% {transform: translateY(-20px);}
+      100% {transform: translateY(800px);}
+    }
+    .emoji {
+      position: absolute;
+      font-size: 24px;
+      pointer-events: none;
+      animation: floatEmoji 6s linear infinite;
+    }
+    @keyframes floatEmoji {
+      0% {transform: translateY(0);}
+      100% {transform: translateY(-800px);}
+    }
+    #clickCounter {
+      font-size: 20px;
+      color: #333;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="greeting">Hey there! 😍</h1>
+  <p>Click the buttons to see some cute surprises!</p>
+
+  <button onclick="showMessage('You make my heart skip a beat! 💓')">Cute 1</button>
+  <button onclick="showMessage('Are you made of sugar? Because you’re sweet! 🍬')">Cute 2</button>
+  <button onclick="showMessage('I hope your day is as amazing as you are! ✨')">Cute 3</button>
+  <button onclick="showMessage('You’re my favorite notification! 📲')">Cute 4</button>
+  <button onclick="showMessage('Do you believe in love at first sight, or should I walk by again? 😏')">Funny 1</button>
+  <button onclick="showMessage('Roses are red, violets are blue, I can’t rhyme, but I like you! 🌹')">Funny 2</button>
+  <button onclick="showMessage('Warning: Looking at you may cause uncontrollable smiling 😁')">Funny 3</button>
+  <button onclick="danceParty()">💃 Dance Party! 🕺</button>
+  <button id="surpriseBtn">🎁 Surprise Me!</button>
+  <button id="easterEgg" style="display:none;">✨ Secret!</button>
+
+  <div id="clickCounter">Clicks: 0</div>
+
+  <script>
+    // Ask for name
+    let name = prompt("Hey! What's your name? 😄");
+    if(name === null || name.trim() === "") { name = "Cutie"; }
+    document.getElementById("greeting").innerText = `Hey ${name}! 😍`;
+
+    let clicks = 0;
+
+    // Random cute/funny messages
+    const messages = [
+      "You make my heart skip a beat! 💓",
+      "Are you made of sugar? Because you’re sweet! 🍬",
+      "I hope your day is as amazing as you are! ✨",
+      "You’re my favorite notification! 📲",
+      "Do you believe in love at first sight, or should I walk by again? 😏",
+      "Roses are red, violets are blue, I can’t rhyme, but I like you! 🌹",
+      "Warning: Looking at you may cause uncontrollable smiling 😁",
+      "You are the sparkle in my day! 🌟",
+      "You make even Wi-Fi jealous of our connection 😎"
+    ];
+
+    function showMessage(msg) {
+      alert(`${name}, ${msg}`);
+      clicks++;
+      document.getElementById("clickCounter").innerText = `Clicks: ${clicks}`;
+      if(clicks >= 10) document.getElementById("easterEgg").style.display = 'inline-block';
+    }
+
+    // Surprise button
+    document.getElementById("surpriseBtn").onclick = function() {
+      const msg = messages[Math.floor(Math.random() * messages.length)];
+      showMessage(msg);
+      createEmoji();
+    }
+
+    // Floating hearts
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerText = '❤️';
+      heart.style.left = Math.random() * window.innerWidth + 'px';
+      heart.style.fontSize = (20 + Math.random() * 30) + 'px';
+      heart.style.animationDuration = (3 + Math.random() * 3) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 300);
+
+    // Confetti
+    function createConfetti() {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.style.left = Math.random() * window.innerWidth + 'px';
+      confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      confetti.style.animationDuration = (2 + Math.random() * 3) + 's';
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 3000);
+    }
+    setInterval(createConfetti, 200);
+
+    // Floating emojis
+    function createEmoji() {
+      const emojiList = ['😍','🥰','💖','🌟','😎','💃','🕺'];
+      const emoji = document.createElement('div');
+      emoji.className = 'emoji';
+      emoji.innerText = emojiList[Math.floor(Math.random()*emojiList.length)];
+      emoji.style.left = Math.random() * window.innerWidth + 'px';
+      emoji.style.fontSize = (20 + Math.random() * 40) + 'px';
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 5000);
+    }
+
+    // Dance party effect
+    function danceParty() {
+      let count = 0;
+      const interval = setInterval(() => {
+        const x = (Math.random() - 0.5) * 20;
+        const y = (Math.random() - 0.5) * 20;
+        const rotate = (Math.random() - 0.5) * 20;
+        document.body.style.transform = `translate(${x}px, ${y}px) rotate(${rotate}deg)`;
+        createHeart();
+        createConfetti();
+        count++;
+        if(count > 50) {
+          clearInterval(interval);
+          document.body.style.transform = 'translate(0,0) rotate(0)';
+        }
+      }, 50);
+      alert(`${name}, let's dance! 🎉💃🕺`);
+    }
+
+    // Easter egg button
+    document.getElementById("easterEgg").onclick = function() {
+      for(let i=0;i<20;i++) createEmoji();
+      alert(`${name}, you found the secret! 🌈✨💖`);
+    }
+
+  </script>
+</body>
+</html>
+    
+  </body>
+  
+</html>
